@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PeeX - Portofolio Resmi</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary-color: #38bdf8;
+      --secondary-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --font-color: #f1f5f9;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--font-color);
+      background-color: var(--secondary-color);
+      transition: background-color 0.3s ease;
+    }
+
+    #video-bg {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+    }
+
+    .glass-card {
+      background-color: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      padding: 1.5rem;
+    }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      background-color: #1e293b;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      font-size: 1.25rem;
+      border: 1px solid transparent;
+    }
+    
+    .icon-btn:hover {
+      background-color: #334155;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Efek Fountain */
+    .fountain-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .fountain-particle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        opacity: 0;
+        transform: scale(0);
+        animation: fountain-burst 1s forwards;
+    }
+
+    @keyframes fountain-burst {
+        0% { transform: scale(0); opacity: 1; }
+        100% { transform: scale(1); opacity: 0; }
+    }
+    
+    pre.asciiart {
+      font-family: monospace;
+      color: var(--primary-color);
+      font-size: 10px;
+      line-height: 1.2;
+      margin: 1rem auto;
+      text-align: center;
+    }
+
+    ::selection {
+      background: var(--primary-color);
+      color: var(--secondary-color);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <video autoplay muted loop playsinline id="video-bg">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-aesthetic-gradient-of-liquid-colors-4889-large.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <header class="p-4 z-10">
+    <div class="container mx-auto flex items-center justify-between glass-card p-4">
+      <div class="flex items-center gap-4">
+        <img src="https://files.catbox.moe/o1vsrw.jpg" alt="Logo" class="w-12 h-12 rounded-full shadow-md" />
+        <h1 class="text-2xl font-bold">PeeX - Portofolio</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 container mx-auto p-6 space-y-12 z-10">
+    <section class="text-center space-y-4">
+      <h2 class="text-4xl font-bold">Hai, Saya <span class="text-sky-400">PallxMods</span></h2>
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto">
+        Bisa panggil saya PeeX. Selamat datang di portofolio saya yang dibuat dengan
+        Tailwind CSS, Chart.js, dan sentuhan interaktif.
+      </p>
+    </section>
+
+    <section class="glass-card">
+      <h3 class="text-2xl font-semibold mb-4">Statistik Pengunjung</h3>
+      <canvas id="visitorChart" class="w-full h-64"></canvas>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-semibold mb-4">Bahasa Pemrograman yang Dikuasai</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="flex items-center gap-3 glass-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python" class="w-8 h-8"/>
+          <span class="text-lg font-medium">Python</span>
+        </div>
+        <div class="flex items-center gap-3 glass-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript" class="w-8 h-8"/>
+          <span class="text-lg font-medium">JavaScript</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-semibold mb-4">Temukan Saya di</h3>
+      <div class="flex gap-6 flex-wrap">
+        <a href="https://github.com/pallset" target="_blank" class="icon-btn" title="GitHub">
+          <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github" class="w-6 h-6"/>
+        </a>
+        <a href="https://t.me/iiPicture" target="_blank" class="icon-btn" title="Telegram">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" class="w-6 h-6"/>
+        </a>
+        <a href="https://youtube.com/PallxMods" target="_blank" class="icon-btn" title="YouTube">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" class="w-6 h-6"/>
+        </a>
+      </div>
+    </section>
+
+    <section class="glass-card">
+      <h3 class="text-2xl font-semibold mb-4">Kirim Pesan</h3>
+      <form id="contactForm" class="space-y-4">
+        <input type="text" id="name" placeholder="Nama" required class="w-full px-4 py-3 rounded-lg bg-slate-700 text-white placeholder-slate-400" />
+        <input type="email" id="email" placeholder="Email" required class="w-full px-4 py-3 rounded-lg bg-slate-700 text-white placeholder-slate-400" />
+        <textarea id="message" placeholder="Pesan" required class="w-full px-4 py-3 rounded-lg bg-slate-700 text-white placeholder-slate-400 h-32"></textarea>
+        <button type="submit" class="w-full px-6 py-3 bg-sky-600 rounded-lg hover:bg-sky-500 transition-colors">Kirim</button>
+      </form>
+      <p id="status" class="text-sm mt-2 text-slate-400 text-center"></p>
+    </section>
+  </main>
+
+  <div id="musicPlayer" class="fixed bottom-4 right-4 z-20 glass-card w-72 p-4 transition-all duration-300">
+    <div class="flex items-center gap-3 content">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxrdlAYSHlxkkVjdvYFYl-B1__SgPP3gbpbrqlxak8O-H_Rc20Z6_6VNvf&s=10" class="w-14 h-14 rounded-lg" alt="Cover"/>
+      <div>
+        <p class="font-bold text-white text-base truncate">Bersamamu</p>
+        <p class="text-slate-400 text-sm truncate">Vierralate</p>
+      </div>
+    </div>
+    <div class="controls flex items-center justify-between mt-4">
+      <button id="playBtn" class="icon-btn" aria-label="Play">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z" />
+        </svg>
+      </button>
+      <button id="pauseBtn" class="icon-btn" aria-label="Pause">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+        </svg>
+      </button>
+      <button id="toggleSize" class="icon-btn" aria-label="Minimize">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 19H5V5h14v14zm0-2V7H7v10h12zM7 5H5v2h2V5zM19 5h-2v2h2V5zM7 17H5v2h2v-2zM19 17h-2v2h2v-2z" />
+        </svg>
+      </button>
+    </div>
+    <audio id="audioPlayer" src="https://files.catbox.moe/sikd6n.mp3"></audio>
+  </div>
+
+  <footer class="text-center p-6 z-10 mt-6">
+    <p class="text-slate-400">&copy; 2025 PeeX - Offc</p>
+    <pre class="asciiart">
+██████╗ ███████╗███████╗██╗  ██╗   
+██╔══██╗██╔════╝██╔════╝██║ ██╔╝ 
+██████╔╝█████╗  █████╗  █████╔╝
+██╔═══╝ ██╔══╝  ██╔══╝  ██╔═██╗
+██║     ███████╗███████╗██║  ██╗    
+╚═╝     ╚══════╝╚══════╝╚═╝  ╚═╝ 
+    </pre>
+  </footer>
+
+  <script>
+    // Fountain effect
+    function createFountain(e) {
+      const container = document.body;
+      const x = e.clientX;
+      const y = e.clientY;
+      const count = 30;
+      
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'fountain-particle';
+        
+        const size = Math.random() * 8 + 4;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+
+        const angle = Math.random() * 360;
+        const velocity = Math.random() * 150 + 50;
+        const vx = velocity * Math.cos(angle * Math.PI / 180);
+        const vy = velocity * Math.sin(angle * Math.PI / 180);
+
+        particle.style.setProperty('--vx', `${vx}px`);
+        particle.style.setProperty('--vy', `${vy}px`);
+        
+        container.appendChild(particle);
+
+        setTimeout(() => {
+          particle.remove();
+        }, 1000);
+      }
+    }
+    
+    // Attach fountain effect to buttons
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', createFountain);
+    });
+
+    // Chart.js
+    const ctx = document.getElementById('visitorChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+        datasets: [{
+          label: 'Pengunjung',
+          data: [12, 19, 3, 5, 2, 3, 9],
+          borderColor: '#38bdf8',
+          backgroundColor: 'rgba(56,189,248,0.2)',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#f1f5f9' } },
+          tooltip: {
+            backgroundColor: 'rgba(30, 41, 59, 0.9)',
+            titleColor: '#fff',
+            bodyColor: '#e2e8f0',
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: '#94a3b8' },
+            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+          },
+          y: {
+            ticks: { color: '#94a3b8' },
+            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+          }
+        }
+      }
+    });
+
+    // Contact Form
+    let lastSubmit = 0;
+    const form = document.getElementById('contactForm');
+    const statusText = document.getElementById('status');
+    const telegramToken = "7500700394:AAGPxD31Q-iPktc-G0SmOTPJ4TgnVs5Qae4";
+    const telegramChatId = "5802566500";
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const now = Date.now();
+      if (now - lastSubmit < 300000) {
+        statusText.textContent = "Tunggu 5 menit sebelum kirim pesan lagi.";
+        return;
+      }
+      lastSubmit = now;
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const text = `Pesan Baru dari Portofolio\nNama: ${name}\nEmail: ${email}\nPesan: ${message}`;
+      
+      statusText.textContent = "Mengirim pesan...";
+      
+      try {
+        await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: telegramChatId, text })
+        });
+        statusText.textContent = "Pesan berhasil dikirim! ";
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        statusText.textContent = "Gagal mengirim pesan. ";
+      }
+    });
+
+    // Music Player
+    const audio = document.getElementById('audioPlayer');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const toggleBtn = document.getElementById('toggleSize');
+    const player = document.getElementById('musicPlayer');
+    const content = player.querySelector('.content');
+    const controls = player.querySelector('.controls');
+    let minimized = false;
+
+    playBtn.addEventListener('click', (e) => { e.stopPropagation(); audio.play(); });
+    pauseBtn.addEventListener('click', (e) => { e.stopPropagation(); audio.pause(); });
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      minimized = !minimized;
+      if (minimized) {
+        player.classList.add("minimized");
+        player.style.width = '72px';
+        player.style.height = '72px';
+        player.style.padding = '0';
+        content.style.display = 'none';
+        controls.style.display = 'none';
+        toggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19V5H5v14h14zm0 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2z"/></svg>';
+      } else {
+        player.classList.remove("minimized");
+        player.style.width = '288px';
+        player.style.height = 'auto';
+        player.style.padding = '1rem';
+        content.style.display = 'flex';
+        controls.style.display = 'flex';
+        toggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h14v14zm0-2V7H7v10h12zM7 5H5v2h2V5zM19 5h-2v2h2V5zM7 17H5v2h2v-2zM19 17h-2v2h2v-2z"/></svg>';
+      }
+    });
+
+    player.addEventListener('click', () => {
+      if (minimized) {
+        minimized = false;
+        player.classList.remove("minimized");
+        player.style.width = '288px';
+        player.style.height = 'auto';
+        player.style.padding = '1rem';
+        content.style.display = 'flex';
+        controls.style.display = 'flex';
+        toggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h14v14zm0-2V7H7v10h12zM7 5H5v2h2V5zM19 5h-2v2h2V5zM7 17H5v2h2v-2zM19 17h-2v2h2v-2z"/></svg>';
+      }
+    });
+  </script>
+</body>
+</html>
